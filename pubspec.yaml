@@ -9,12 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # مكاتب فايربيس الأساسية والإشعارات
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.10
-  # مكتبة محاكاة المكالمة الواردة
   flutter_callkit_incoming: ^1.1.5
-  # مكاتب جلب البطارية والموقع
   battery_plus: ^5.0.1
   geolocator: ^11.0.0
 
