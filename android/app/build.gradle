@@ -1,42 +1,29 @@
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    // ضفنا سطر فايربيس هون تحضيراً للمرحلة الجاية
-    id "com.google.gms.google-services" 
-}
-
-android {
-    namespace "com.example.alertapp"
-    compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-
-    defaultConfig {
-        // هذا هو اسم الحزمة اللي رح تحطيه بموقع فايربيس!
-        applicationId "com.example.alertapp"
-        minSdkVersion 23
-        targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.debug
-        }
+    dependencies {
+        // تعريف خدمات جوجل وفايربيس
+        classpath 'com.google.gms:google-services:4.4.1'
     }
 }
 
-flutter {
-    source "../.."
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
-dependencies {
-    // مكاتب فايربيس للأندرويد
-    implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-analytics'
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
 }
